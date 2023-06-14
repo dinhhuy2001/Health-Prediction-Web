@@ -4,12 +4,12 @@ import { getStorage } from 'firebase/storage';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyDTyYlBTlUVxfLPQEjGioCQY8duBCP8ENI',
-    authDomain: 'chat-5ba1f.firebaseapp.com',
-    projectId: 'chat-5ba1f',
-    storageBucket: 'chat-5ba1f.appspot.com',
-    messagingSenderId: '925385573850',
-    appId: '1:925385573850:web:cbe3444673ed383910ece3',
+    apiKey: 'AIzaSyCNqbAYU406jP1e_-rcAsqlq5pwKkcjxDU',
+    authDomain: 'thelastdance-bb85c.firebaseapp.com',
+    projectId: 'thelastdance-bb85c',
+    storageBucket: 'thelastdance-bb85c.appspot.com',
+    messagingSenderId: '317144508004',
+    appId: '1:317144508004:web:4e745dd8fe77a04155a171',
 };
 
 // Initialize Firebase

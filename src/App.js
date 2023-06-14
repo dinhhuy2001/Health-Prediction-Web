@@ -21,19 +21,17 @@ function App() {
     return (
         <Router>
             <Header />
-            {/* {currentUser && <ChatHome />} */}
+            {currentUser && <ChatHome />}
             <Routes>
-                <Route path="/">
-                    <Route exact path="/home" element={<Home />}></Route>
-                    <Route path="/predict" element={<Predict />}></Route>
-                    <Route path="/about" element={<About />}></Route>
-                    <Route path="/services" element={<Services />}></Route>
-                    <Route path="/appointment" element={<Appointment />}></Route>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
-                    {currentUser && <Route path="/success" element={<Success />} />}
-                </Route>
+                <Route exact path="/" element={<Home />}></Route>
+                <Route path="/predict" element={<Predict />}></Route>
+                <Route path="/about" element={<About />}></Route>
+                <Route path="/services" element={<Services />}></Route>
+                <Route path="/appointment" element={<Appointment />}></Route>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
+                {currentUser && <Route path="/success" element={<Success />} />}
             </Routes>
 
             <Footer />

@@ -22,8 +22,6 @@ const Register = () => {
         try {
             //Create user
             const res = await createUserWithEmailAndPassword(auth, email, password);
-
-            //Create a unique image name
             const date = new Date().getTime();
             const storageRef = ref(storage, `${displayName + date}`);
 
@@ -45,7 +43,7 @@ const Register = () => {
 
                         //create empty user chats on firestore
                         await setDoc(doc(db, 'userChats', res.user.uid), {});
-                        navigate('/home');
+                        navigate('/');
                     } catch (err) {
                         console.log(err);
                         setErr(true);
@@ -62,8 +60,7 @@ const Register = () => {
     return (
         <div className="formContainer">
             <div className="formWrapper">
-                <span className="logo">Lama Chat</span>
-                <span className="title">Register</span>
+                <span className="logo">Register</span>
                 <form onSubmit={handleSubmit}>
                     <input required type="text" placeholder="display name" />
                     <input required type="email" placeholder="email" />
@@ -78,7 +75,7 @@ const Register = () => {
                     {err && <span>Something went wrong</span>}
                 </form>
                 <p>
-                    You do have an account? <Link to="/register">Login</Link>
+                    You do have an account? <Link to="/login">Login</Link>
                 </p>
             </div>
         </div>
