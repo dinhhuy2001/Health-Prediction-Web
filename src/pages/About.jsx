@@ -5,8 +5,8 @@ import CheckChatLogin from '../components/CheckChatLogin';
 
 const About = () => {
     return (
-        <div>
-            <h1 className="text-center">About Us</h1>
+        <div style={{ backgroundColor: '#f6f7fb' }}>
+            <h1 className="text-center py-3">About Us</h1>
             <div className="container overflow-hidden">
                 <div className="row g-4">
                     <div className="col-12 col-md-4">
@@ -21,7 +21,7 @@ const About = () => {
                 </div>
             </div>
 
-            <div className="container my-5 d-flex flex-column align-items-center">
+            <div className="container py-5 d-flex flex-column align-items-center">
                 <h2>WHO WE ARE!</h2>
                 <h3 className="w-75 text-center">
                     We ensures the best health care as well as clinical service with outstanding personal service.

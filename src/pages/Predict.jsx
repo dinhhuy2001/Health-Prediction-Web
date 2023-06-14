@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faMagnifyingGlass, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CheckChatLogin from '../components/CheckChatLogin';
+import Doctor from '../components/Doctor';
 
 const symptomps = [
     'Itching',
@@ -146,6 +147,25 @@ const Predict = () => {
 
     const [resultPrediction, setResultPrediction] = useState('');
 
+    const [diseaseInfo, setDiseaseInfo] = useState({});
+
+    const [doctorSuggest, setDoctorSuggest] = useState({});
+
+    const [diseases, setDiseases] = useState([]);
+
+    const [doctors, setDoctors] = useState([]);
+    useEffect(() => {
+        axios
+            .get('https://raw.githubusercontent.com/dinhhuy2001/fake-data-for-finalPbl/master/doctors.json')
+            .then((res) => setDoctors(res.data));
+    }, []);
+
+    useEffect(() => {
+        axios
+            .get('https://raw.githubusercontent.com/dinhhuy2001/fake-data-for-finalPbl/master/diseases.json')
+            .then((res) => setDiseases(res.data));
+    }, []);
+
     const handleSymptomps = (e) => {
         setList([...list, e]);
         const newListBellow = listBellow.filter((i, _) => i !== e);
@@ -158,13 +178,12 @@ const Predict = () => {
         setList(newList);
     };
 
-    const handlePrediction = (e) => {
+    const handlePrediction = async (e) => {
         try {
             e.preventDefault();
             const requestFile = list.toString();
-            console.log({ requestFile: requestFile });
-            axios
-                .get(`http://127.0.0.1:5000/predict?requestFile=${requestFile}`, {
+            await axios
+                .get(`https://tdhuy.pythonanywhere.com/predict?requestFile=${requestFile}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -173,13 +192,40 @@ const Predict = () => {
                 .then((res, data) => {
                     setResultPrediction(res.data);
                 });
+            document.querySelector('.predict-container').classList.remove('none');
         } catch (error) {
-            // Handle any errors that occur during the request
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        for (let i = 0; i < diseases.length; ++i) {
+            if (diseases[i].name === resultPrediction) {
+                setDiseaseInfo(diseases[i]);
+            }
+        }
+    }, [resultPrediction]);
+
+    useEffect(() => {
+        for (let j = 0; j < doctors.length; ++j) {
+            if (diseaseInfo.speciality === doctors[j].specialize) {
+                setDoctorSuggest(doctors[j]);
+            }
+        }
+    }, [diseaseInfo, doctors]);
+
+    const handleDetail = () => {
+        document.querySelector('.disease-doctor').classList.toggle('none');
+    };
+
+    const handleReset = () => {
+        document.querySelector('.disease-doctor').classList.add('none');
+        document.querySelector('.predict-container').classList.add('none');
+        setSearchValue('');
+        setList([]);
+    };
     return (
-        <div className="py-5 predict">
+        <div className="py-5 predict" style={{ backgroundColor: '#f6f7fb' }}>
             <div className="mb-3">
                 <div className="symptomp-search container d-flex ">
                     <div className="search-icon">
@@ -195,47 +241,58 @@ const Predict = () => {
                     />
                 </div>
             </div>
-            <div className="symptomps-list mb-3">
+            <div className="mb-3">
                 <div className="container text-center">
-                    <div className="row symptomps-container g-2">
+                    <div className="row g-3">
                         {list.sort().map((value, id) => (
-                            <div key={id} className="col-6 col-md-4 col-lg-3 symptomp-item">
-                                {value}
-                                <div className="symptomp-delete" onClick={() => handleDelete(id)}>
-                                    <FontAwesomeIcon icon={faXmark} />
+                            <div key={id} className="col-6 col-md-4 col-lg-4">
+                                <div className="w-80 symptomp-item">
+                                    {value}
+                                    <div className="symptomp-delete" onClick={() => handleDelete(id)}>
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className="mb-3 text-center">
+            <div className="mb-3 d-flex justify-content-center align-items-center" style={{ gap: '20px' }}>
                 <button type="button" className="btn btn-info" onClick={handlePrediction}>
                     Predict
                 </button>
+                <button type="button" className="btn btn-danger" onClick={handleReset}>
+                    Reset
+                </button>
             </div>
-            <div className="mb-3 text-center">
-                <div className="h4 result-title">
-                    Result:
-                    <span className="result">{resultPrediction}</span>
+            <div className="container">
+                <div className="bg-light mb-3 predict-container none">
+                    <div className="d-flex justify-content-between align-items-center predict-header">
+                        <span>You may have:</span>
+                        <span className="predict-result">{resultPrediction}</span>
+                        <span className="click-detail d-flex align-items-center" onClick={handleDetail}>
+                            Click to see detail... <FontAwesomeIcon className="ms-2" icon={faChevronDown} />
+                        </span>
+                    </div>
+                    <div className="row g-3 disease-doctor none">
+                        <div className="disease-info col-12 col-md-6 col-lg-8">
+                            <h5>{diseaseInfo.description}</h5>
+                            <h5>Symptomps: {diseaseInfo.symptom}</h5>
+                        </div>
+                        <Doctor key={doctorSuggest.id} doctor={doctorSuggest} />
+                    </div>
                 </div>
             </div>
-            <div className="symptomps">
-                <div className="container text-center">
-                    <div className="row g-2 symptomps-container align-items-center">
-                        {listBellow
-                            .sort()
-                            .filter((name) => name.match(new RegExp(searchValue, 'i')))
-                            .map((value, id) => (
-                                <div
-                                    key={id}
-                                    className="col-6 col-md-4 col-lg-4 symptomp-item "
-                                    onClick={() => handleSymptomps(value)}
-                                >
-                                    {value}
-                                </div>
-                            ))}
-                    </div>
+            <div className="container mx-auto ">
+                <div className="row g-3">
+                    {listBellow
+                        .sort()
+                        .filter((name) => name.match(new RegExp(searchValue, 'i')))
+                        .map((value, id) => (
+                            <div key={id} className="col-6 col-md-4 col-lg-4" onClick={() => handleSymptomps(value)}>
+                                <div className="w-80 text-center mx-auto symptomp-item">{value}</div>
+                            </div>
+                        ))}
                 </div>
             </div>
             <CheckChatLogin />

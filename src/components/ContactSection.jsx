@@ -23,13 +23,13 @@ const ContactSection = () => {
                         <p className="mt-4">
                             <i className="blue-color">
                                 <FontAwesomeIcon icon={faLocationArrow} />
-                            </i>{' '}
+                            </i>
                             Tupac Amaru 200 - Lima
                         </p>
                         <p>
                             <i className="blue-color">
                                 <FontAwesomeIcon icon={faPhone} />
-                            </i>{' '}
+                            </i>
                             +51 0123456789
                         </p>
                         <div className="mb-3 fs-4">
@@ -51,7 +51,8 @@ const ContactSection = () => {
                 <div className="col">
                     <div className="p-3 w-75 mx-auto">
                         <h4 className="fw-bolder">Opening Hours</h4>
-                        <table className="table text-secondary fw-bold rounded" style={{ backgroundColor: '#e7f0f2' }}>
+
+                        <table className="table text-secondary fw-bold rounded">
                             <tbody>
                                 <tr>
                                     <td>Monday</td>

@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightToBracket, faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRightToBracket, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { auth } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
@@ -23,7 +23,7 @@ const Header = () => {
         <>
             <Navbar bg="white" variant="light" expand="lg" sticky="top" fixed="top">
                 <Container varient="light">
-                    <Navbar.Brand as={NavLink} to="/home">
+                    <Navbar.Brand as={NavLink} to="/">
                         <img src={logo} alt="Healthcare" width="180" height="50" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -38,17 +38,21 @@ const Header = () => {
                             <Nav.Link as={NavLink} className={(isActive) => (isActive ? 'active' : '')} to="/services">
                                 Services
                             </Nav.Link>
-                            <Nav.Link as={NavLink} className={(isActive) => (isActive ? 'active' : '')} to="/blog">
-                                Blog
+                            <Nav.Link
+                                as={NavLink}
+                                className={(isActive) => (isActive ? 'active' : '')}
+                                to="/appointment"
+                            >
+                                Appointment
                             </Nav.Link>
                         </Nav>
                         <Navbar.Text className="fs-5 fw-bold">
                             {currentUser ? (
                                 <div className="d-flex justify-content-center align-items-center">
-                                    <i style={{ fontSize: '24px' }}>
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </i>
-                                    <span className="mx-1">{currentUser.displayName}</span>
+                                    <div className="header-info">
+                                        <img src={currentUser.photoURL} alt="avatar" />
+                                        <span>{currentUser.displayName}</span>
+                                    </div>
                                     <button onClick={handleLogout} className="btn btn-secondary text-center ms-2">
                                         <i className="mx-auto">
                                             <FontAwesomeIcon icon={faRightFromBracket} />

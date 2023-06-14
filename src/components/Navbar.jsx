@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
@@ -6,7 +6,6 @@ const Navbar = () => {
 
     return (
         <div className="navbar">
-            <span className="logo">Chat</span>
             <div className="user">
                 <img src={currentUser.photoURL} alt="" />
                 <span>{currentUser.displayName}</span>

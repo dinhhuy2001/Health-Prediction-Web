@@ -1,9 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .formContainer {
     background-color: #a7bcff;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 .formContainer .formWrapper {
     background-color: white;
@@ -120,6 +126,7 @@
 .footer {
     background-color: rgb(4, 4, 52);
     margin-top: auto;
+    overflow: hidden;
 }
 .active {
     font-weight: bold !important;
@@ -142,6 +149,21 @@
     border-radius: 50%;
     -o-object-fit: cover;
     object-fit: cover;
+}
+
+.header-info {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.header-info img {
+    background-color: #ddddf7;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    cursor: pointer;
 }
 .home .container .sidebar .navbar .user button {
     background-color: #5d5b8d;
@@ -288,10 +310,6 @@
     margin-bottom: -15px;
 }
 
-/* .symptomps-container {
-    white-space: nowrap;
-    gap: 10px;
-} */
 .symptomp-item {
     background-color: #fff;
     border-bottom: 0.25rem solid #fff0;
@@ -330,8 +348,7 @@
 }
 .search-input {
     width: 100%;
-    margin-left: 30px;
-    border-radius: 25px;
+    margin-left: 32px;
     outline: none;
     border: none;
 }
@@ -421,6 +438,80 @@
     animation: tada 1s linear infinite;
 }
 
-.footer {
-    margin-top: -18px;
+.default-btn {
+    background-color: #482576;
+    width: 150px;
+    height: 35px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    border: 2px solid #482576;
+    background-color: #fff;
+    color: #482576;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.default-btn:hover {
+    background-color: #482576;
+    color: #fff;
+}
+
+.table > :not(caption) > * > * {
+    background-color: #e7f0f2 !important;
+}
+
+.success-page {
+    height: calc(100vh - 76px - 165px);
+    background-image: url('https://raw.githubusercontent.com/arifulsajib/pictures-for-projects/main/successPage/success2.gif');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.predict-container {
+}
+
+.predict-header {
+    border-bottom: 1px solid #dfdfdf;
+    border-top: 1px solid #dfdfdf;
+    padding: 15px 0;
+}
+
+.predict-header span {
+    color: #274ba4;
+    font-weight: 600;
+}
+
+.predict-header .predict-result {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.disease-doctor {
+    padding: 15px 0;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.disease-info {
+    display: flex;
+    flex-direction: column;
+    word-spacing: 1.2px;
+    gap: 15px;
+}
+
+.click-detail {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.click-detail:hover {
+    color: #ffc845 !important;
+}
+
+.none {
+    display: none !important;
+}
+
+.list-filter {
+    width: 80%;
 }
