@@ -102,11 +102,9 @@
 }
 .home .container .sidebar .navbar {
     display: flex;
-    align-items: center;
     background-color: #2f2d52;
     height: 50px;
-    padding: 10px;
-    justify-content: space-between;
+    width: 100%;
     color: #ddddf7;
 }
 .home .container .sidebar .navbar .logo {
@@ -140,7 +138,9 @@
 }
 .home .container .sidebar .navbar .user {
     display: flex;
-    gap: 10px;
+    width: 100%;
+    padding: 0 0 0 10px;
+    gap: 15px;
 }
 .home .container .sidebar .navbar .user img {
     background-color: #ddddf7;
@@ -450,6 +450,10 @@
     color: #482576;
     font-size: 16px;
     cursor: pointer;
+}
+
+.card .second-btn {
+    width: 200px;
 }
 
 .default-btn:hover {

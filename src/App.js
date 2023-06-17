@@ -14,10 +14,11 @@ import ChatHome from './pages/ChatHome';
 import { AuthContext } from './context/AuthContext';
 import { useContext } from 'react';
 import ServiceDetail from './pages/ServiceDetail';
-import Success from './pages/Success';
+import AppointmentDetail from './pages/AppointmentDetail';
 
 function App() {
     const { currentUser } = useContext(AuthContext);
+
     return (
         <Router>
             <Header />
@@ -28,12 +29,11 @@ function App() {
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/services" element={<Services />}></Route>
                 <Route path="/appointment" element={<Appointment />}></Route>
+                <Route path="/appointment/:doctorId" element={<AppointmentDetail />}></Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
-                {currentUser && <Route path="/success" element={<Success />} />}
             </Routes>
-
             <Footer />
         </Router>
     );

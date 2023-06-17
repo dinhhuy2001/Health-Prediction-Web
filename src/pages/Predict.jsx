@@ -223,6 +223,7 @@ const Predict = () => {
         document.querySelector('.predict-container').classList.add('none');
         setSearchValue('');
         setList([]);
+        setListBellow(symptomps);
     };
     return (
         <div className="py-5 predict" style={{ backgroundColor: '#f6f7fb' }}>

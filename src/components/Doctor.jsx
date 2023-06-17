@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserNurse, faCalendar, faCoins, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 const Doctor = (props) => {
-    const { name, specialize, weekDays, time, fees, pic, phone } = props.doctor;
+    const { id, name, specialize, weekDays, time, fees, pic, phone } = props.doctor;
     return (
         <>
             <div className="col-12 col-md-6 col-lg-4">
@@ -23,9 +23,9 @@ const Doctor = (props) => {
                             <FontAwesomeIcon icon={faCoins} /> Fee: {fees}$
                         </h6>
                         <h6 style={{ fontWeight: '600' }}>
-                            <FontAwesomeIcon icon={faPhone} /> Phone: {phone}$
+                            <FontAwesomeIcon icon={faPhone} /> Phone: {phone}
                         </h6>
-                        <Link to="/success" className="text-decoration-none">
+                        <Link to={`/appointment/${id}`} className="text-decoration-none">
                             <button className="default-btn d-block mx-auto">Appointment</button>
                         </Link>
                     </div>

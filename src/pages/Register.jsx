@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Add from '../img/addAvatar.png';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { ChatContext } from '../context/ChatContext';
 
 const Register = () => {
     const [err, setErr] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { setCurrentUser } = useContext(AuthContext);
+    const { data } = useContext(ChatContext);
 
     const handleSubmit = async (e) => {
         setLoading(true);
@@ -43,6 +47,8 @@ const Register = () => {
 
                         //create empty user chats on firestore
                         await setDoc(doc(db, 'userChats', res.user.uid), {});
+                        setCurrentUser({ photoURL: downloadURL, displayName, uid: res.user.uid });
+                        data.user = {};
                         navigate('/');
                     } catch (err) {
                         console.log(err);
@@ -71,7 +77,7 @@ const Register = () => {
                         <span>Add an avatar</span>
                     </label>
                     <button disabled={loading}>Sign up</button>
-                    {loading && 'Uploading and compressing the image please wait...'}
+                    {loading && 'Uploading Image...'}
                     {err && <span>Something went wrong</span>}
                 </form>
                 <p>

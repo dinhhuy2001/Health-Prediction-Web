@@ -15,7 +15,8 @@ const ServiceDetail = () => {
     }, []);
     const { serviceId } = useParams();
     const specificService = services.find((service) => service.id === serviceId);
-
+    console.log(serviceId);
+    console.log(specificService);
     const navigate = useNavigate();
     const handleBackBtn = () => {
         navigate('/services');
