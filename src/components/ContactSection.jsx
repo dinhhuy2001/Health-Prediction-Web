@@ -14,23 +14,23 @@ const ContactSection = () => {
             <div className="row gx-5">
                 <div className="col">
                     <div className="p-3 w-75 mx-auto">
-                        <h2 className="fw-bolder blue-color">Medisure</h2>
+                        <h2 className="fw-bolder blue-color">Smarter Healthcare</h2>
                         <p className="fw-bold text-secondary">
-                            MediSure ensures the best health care as well as clinical service with outstanding personal
-                            service. We ensures the best health care as well as clinical service with outstanding
-                            personal service.
+                            Smarter Healthcare ensures the best health care as well as clinical service with outstanding
+                            personal service. We ensures the best health care as well as clinical service with
+                            outstanding personal service.
                         </p>
-                        <p className="mt-4">
+                        <p className="mt-4 d-flex" style={{ gap: '10px' }}>
                             <i className="blue-color">
                                 <FontAwesomeIcon icon={faLocationArrow} />
                             </i>
-                            Tupac Amaru 200 - Lima
+                            <span>Tupac Amaru 200 - Lima</span>
                         </p>
-                        <p>
+                        <p className="d-flex" style={{ gap: '10px' }}>
                             <i className="blue-color">
                                 <FontAwesomeIcon icon={faPhone} />
                             </i>
-                            +51 0123456789
+                            <span>+51 0123456789</span>
                         </p>
                         <div className="mb-3 fs-4">
                             <i className="me-4">

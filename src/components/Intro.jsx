@@ -15,12 +15,13 @@ const Intro = () => {
                         <h1 className="fw-extrabold blue-color">WHY CHOOSE US?</h1>
                         <p className="fs-5">
                             We have High quality Doctors who are ready to help you recover. We provide all kinds of
-                            medical Treatment. We have various research laboratory and Expertice doctor. MediSure
-                            ensures the best health care as well as clinical service with outstanding personal service.{' '}
+                            medical Treatment. We have various research laboratory and Expertice doctor. Smarter
+                            Healthcare ensures the best health care as well as clinical service with outstanding
+                            personal service.
                         </p>
                         <p className="fs-5">
-                            The motto of Medisure is that human care is more than healthcare. We prefer quality over
-                            anything.
+                            The motto of Smarter Healthcare is that human care is more than healthcare. We prefer
+                            quality over anything.
                         </p>
                     </div>
                 </div>

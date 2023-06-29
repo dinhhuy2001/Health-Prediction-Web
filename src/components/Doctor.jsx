@@ -17,7 +17,8 @@ const Doctor = (props) => {
                             <FontAwesomeIcon icon={faUserNurse} /> Specialty: {specialize}
                         </h6>
                         <h6 style={{ fontWeight: '600' }}>
-                            <FontAwesomeIcon icon={faCalendar} /> Open: {weekDays} {time}
+                            <FontAwesomeIcon icon={faCalendar} />
+                            <span>Open: {`${weekDays} ${time}`}</span>
                         </h6>
                         <h6 style={{ fontWeight: '600' }}>
                             <FontAwesomeIcon icon={faCoins} /> Fee: {fees}$
