@@ -16,24 +16,24 @@ const Banner = () => {
             <Carousel.Item>
                 <img className="d-block w-100 fixed-height" src={banner1} alt="First slide" />
                 <Carousel.Caption className="caption rounded-3">
-                    <h3>Medisure</h3>
-                    <p>We ensures the best health care as well as clinical service</p>
+                    <h3>Smarter Healthcare</h3>
+                    <p>We Are Providing Best & Affordable Health Care.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img className="d-block w-100 fixed-height" src={banner2} alt="Second slide" />
 
                 <Carousel.Caption className="caption">
-                    <h3>Medisure</h3>
-                    <p>We ensures the best health care as well as clinical service</p>
+                    <h3>Smarter Healthcare</h3>
+                    <p>We Are Providing Best & Affordable Health Care.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img className="d-block w-100 fixed-height" src={banner3} alt="Third slide" />
 
                 <Carousel.Caption className="caption">
-                    <h3>Medisure</h3>
-                    <p>We ensures the best health care as well as clinical service</p>
+                    <h3>Smarter Healthcare</h3>
+                    <p>We Are Providing Best & Affordable Health Care.</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

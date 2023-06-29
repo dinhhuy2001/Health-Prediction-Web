@@ -7,19 +7,20 @@ const CheckChatLogin = () => {
     const { currentUser } = useContext(AuthContext);
 
     const handleCheckUserLogin = () => {
-        if (!currentUser) {
-            alert('Please login to chat with doctor');
+        if (currentUser) {
+            document.querySelector('.home').style.display = 'block';
+            document.querySelector('.chat-button').style.display = 'none';
         } else {
-            if (document.querySelectorAll('.home') && document.querySelectorAll('.chat-button')) {
-                document.querySelector('.home').style.display = 'block';
-                document.querySelector('.chat-button').style.display = 'none';
-            }
+            alert('Please login to use this!');
         }
     };
+
     return (
-        <div className="chat-button" onClick={handleCheckUserLogin}>
-            <FontAwesomeIcon icon={faCommentDots} className="chat__icon" />
-        </div>
+        <>
+            <div className="chat-button" onClick={handleCheckUserLogin}>
+                <FontAwesomeIcon icon={faCommentDots} className="chat__icon" />
+            </div>
+        </>
     );
 };
 

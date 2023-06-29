@@ -22,7 +22,7 @@ const ServiceSection = () => {
             <p className="text-center fs-5">Human care is more than healthcare. We prefer quality over anything.</p>
             <div className="container">
                 <div className="row g-3">
-                    {services.slice(0, 6).map((service) => (
+                    {services.slice(0, 3).map((service) => (
                         <Service key={service.id} service={service}></Service>
                     ))}
                 </div>

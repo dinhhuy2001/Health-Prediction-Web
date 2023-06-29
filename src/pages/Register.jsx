@@ -14,6 +14,7 @@ const Register = () => {
     const navigate = useNavigate();
     const { setCurrentUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
+    let isDoctor = false;
 
     const handleSubmit = async (e) => {
         setLoading(true);
@@ -22,6 +23,8 @@ const Register = () => {
         const email = e.target[1].value;
         const password = e.target[2].value;
         const file = e.target[3].files[0];
+
+        localStorage.setItem('email', email);
 
         try {
             //Create user
@@ -45,9 +48,21 @@ const Register = () => {
                             photoURL: downloadURL,
                         });
 
+                        if (displayName.includes('Dr ')) {
+                            await setDoc(doc(db, 'doctors', res.user.uid), {
+                                uid: res.user.uid,
+                                displayName,
+                                email,
+                                workTime: '',
+                                photoURL: downloadURL,
+                                appoint: [],
+                            });
+                            isDoctor = true;
+                        }
+
                         //create empty user chats on firestore
                         await setDoc(doc(db, 'userChats', res.user.uid), {});
-                        setCurrentUser({ photoURL: downloadURL, displayName, uid: res.user.uid });
+                        setCurrentUser({ photoURL: downloadURL, displayName, uid: res.user.uid, isDoctor: isDoctor });
                         data.user = {};
                         navigate('/');
                     } catch (err) {
@@ -67,13 +82,13 @@ const Register = () => {
         <div className="formContainer">
             <div className="formWrapper">
                 <span className="logo">Register</span>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                     <input required type="text" placeholder="display name" />
                     <input required type="email" placeholder="email" />
                     <input required type="password" placeholder="password" />
                     <input required style={{ display: 'none' }} type="file" id="file" />
                     <label htmlFor="file">
-                        <img src={Add} alt="" />
+                        <img src={Add} alt="avatar" />
                         <span>Add an avatar</span>
                     </label>
                     <button disabled={loading}>Sign up</button>

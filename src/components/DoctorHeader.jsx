@@ -10,7 +10,7 @@ import { signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const Header = () => {
+const DoctorHeader = () => {
     const navigate = useNavigate();
     const { currentUser } = useContext(AuthContext);
     const handleLogout = async () => {
@@ -20,14 +20,6 @@ const Header = () => {
             navigate('/login');
         } catch (e) {
             console.log(e.message);
-        }
-    };
-    const checkExist = async (e) => {
-        e.preventDefault();
-        const checkData = (await getDoc(doc(db, 'appoint', currentUser.uid))).data();
-        if (checkData !== undefined) {
-            navigate('/appointComplete');
-            return true;
         }
     };
 
@@ -53,15 +45,15 @@ const Header = () => {
                             <Nav.Link
                                 as={NavLink}
                                 className={(isActive) => (isActive ? 'active' : '')}
-                                to="/appointment"
+                                to="/doctorSchedule"
                             >
-                                Appointment
+                                Schedule
                             </Nav.Link>
                         </Nav>
                         <Navbar.Text className="fs-5 fw-bold">
                             {currentUser ? (
                                 <div className="d-flex justify-content-center align-items-center">
-                                    <div className="header-info" onClick={checkExist}>
+                                    <div className="header-info">
                                         <img src={currentUser.photoURL} alt="avatar" />
                                         <span>{currentUser.displayName}</span>
                                     </div>
@@ -93,4 +85,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default DoctorHeader;
