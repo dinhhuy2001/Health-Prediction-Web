@@ -2,8 +2,11 @@ import React, { useContext, useState } from 'react';
 import { collection, query, where, getDocs, setDoc, doc, updateDoc, serverTimestamp, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
+
 const Search = () => {
     const [username, setUsername] = useState('');
+    const { t } = useTranslation();
     const [user, setUser] = useState(null);
     const [err, setErr] = useState(false);
 
@@ -64,7 +67,7 @@ const Search = () => {
             <div className="searchForm">
                 <input
                     type="text"
-                    placeholder="Find a user"
+                    placeholder={t('common.chat_find')}
                     onKeyDown={handleKey}
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}

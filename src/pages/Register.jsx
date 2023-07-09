@@ -7,10 +7,12 @@ import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { ChatContext } from '../context/ChatContext';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
     const [err, setErr] = useState(false);
     const [loading, setLoading] = useState(false);
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { setCurrentUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
@@ -48,20 +50,31 @@ const Register = () => {
                             photoURL: downloadURL,
                         });
 
+                        //create empty user chats on firestore
+                        await setDoc(doc(db, 'userChats', res.user.uid), {});
+
                         if (displayName.includes('Dr ')) {
                             await setDoc(doc(db, 'doctors', res.user.uid), {
                                 uid: res.user.uid,
                                 displayName,
                                 email,
-                                workTime: '',
+                                password,
                                 photoURL: downloadURL,
                                 appoint: [],
                             });
                             isDoctor = true;
                         }
+                        if (!displayName.includes('Dr ')) {
+                            await setDoc(doc(db, 'userInfo', res.user.uid), {
+                                uid: res.user.uid,
+                                displayName,
+                                email,
+                                password,
+                                photoURL: downloadURL,
+                                appoint: [],
+                            });
+                        }
 
-                        //create empty user chats on firestore
-                        await setDoc(doc(db, 'userChats', res.user.uid), {});
                         setCurrentUser({ photoURL: downloadURL, displayName, uid: res.user.uid, isDoctor: isDoctor });
                         data.user = {};
                         navigate('/');
@@ -81,22 +94,22 @@ const Register = () => {
     return (
         <div className="formContainer">
             <div className="formWrapper">
-                <span className="logo">Register</span>
+                <span className="logo">{t('common.register')}</span>
                 <form onSubmit={handleSubmit} noValidate>
-                    <input required type="text" placeholder="display name" />
-                    <input required type="email" placeholder="email" />
-                    <input required type="password" placeholder="password" />
+                    <input required type="text" placeholder={t('common.displayName')} />
+                    <input required type="email" placeholder={t('common.email')} />
+                    <input required type="password" placeholder={t('common.password')} />
                     <input required style={{ display: 'none' }} type="file" id="file" />
                     <label htmlFor="file">
                         <img src={Add} alt="avatar" />
-                        <span>Add an avatar</span>
+                        <span>{t('common.add_ava')}</span>
                     </label>
-                    <button disabled={loading}>Sign up</button>
+                    <button disabled={loading}>{t('common.sign_up')}</button>
                     {loading && 'Uploading Image...'}
                     {err && <span>Something went wrong</span>}
                 </form>
                 <p>
-                    You do have an account? <Link to="/login">Login</Link>
+                    {t('common.do')} <Link to="/login">{t('common.login')}</Link>
                 </p>
             </div>
         </div>

@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlask, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Doctor from './Doctor';
+import { useTranslation } from 'react-i18next';
 
 const AppointmentSection = () => {
+    const { t } = useTranslation();
     const [doctors, setDoctors] = useState([]);
     useEffect(() => {
         axios
@@ -17,9 +19,9 @@ const AppointmentSection = () => {
     return (
         <div className="py-5">
             <h2 className="text-center blue-color">
-                <FontAwesomeIcon icon={faFlask} /> Request Appointment
+                <FontAwesomeIcon icon={faCalendarCheck} /> {t('home.appoint_request')}
             </h2>
-            <p className="text-center fs-5">Make sure to make an appointment before visiting our clinic</p>
+            <p className="text-center fs-5">{t('home.appoint_desc')}</p>
             <div className="container">
                 <div className="row g-3">
                     {doctors.slice(0, 3).map((doctor) => (
@@ -28,7 +30,7 @@ const AppointmentSection = () => {
                 </div>
                 <Link to="/appointment" className="text-decoration-none d-flex justify-content-end">
                     <button className="btn btn-secondary d-flex justify-content-center align-items-center">
-                        More Doctors
+                        {t('home.more_doctors')}
                         <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
                     </button>
                 </Link>

@@ -4,8 +4,10 @@ import { Carousel } from 'react-bootstrap';
 import banner1 from '../img/Banner/banner1.jpg';
 import banner2 from '../img/Banner/banner2.jpg';
 import banner3 from '../img/Banner/banner3.jpg';
+import { useTranslation } from 'react-i18next';
 
 const Banner = () => {
+    const { t } = useTranslation();
     const [index, setIndex] = useState(0);
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
@@ -17,7 +19,7 @@ const Banner = () => {
                 <img className="d-block w-100 fixed-height" src={banner1} alt="First slide" />
                 <Carousel.Caption className="caption rounded-3">
                     <h3>Smarter Healthcare</h3>
-                    <p>We Are Providing Best & Affordable Health Care.</p>
+                    <p>{t('home.banner2')}</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -25,7 +27,7 @@ const Banner = () => {
 
                 <Carousel.Caption className="caption">
                     <h3>Smarter Healthcare</h3>
-                    <p>We Are Providing Best & Affordable Health Care.</p>
+                    <p>{t('home.banner2')}</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -33,7 +35,7 @@ const Banner = () => {
 
                 <Carousel.Caption className="caption">
                     <h3>Smarter Healthcare</h3>
-                    <p>We Are Providing Best & Affordable Health Care.</p>
+                    <p>{t('home.banner2')}</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

@@ -1,0 +1,27 @@
+{
+    "common": {
+        "header": {
+            "predict": "Chẩn đoán bệnh",
+            "about": "Về chúng tôi",
+            "services": "Dịch vụ",
+            "appoint": "Đặt lịch hẹn",
+            "schedule": "Quản lý lịch hẹn"
+        },
+        "footer": {
+            "follow": "Follow Us"
+        },
+        "back_btn": "Quay về",
+        "chat_find": "Tìm người dùng",
+        "login": "Đăng nhập",
+        "register": "Đăng ký",
+        "email": "Email",
+        "don": "Bạn chưa có tài khoản?",
+        "sign_in": "Đăng nhập",
+        "sign_up": "Đăng ký",
+        "password": "mật khẩu",
+        "displayName": "Tên hiển thị",
+        "add_ava": "Thêm avatar",
+        "do": "Bạn đã có tài khoản?",
+        "please": "Vui lòng đăng nhập để sử dụng chức năng này!"
+    }
+}

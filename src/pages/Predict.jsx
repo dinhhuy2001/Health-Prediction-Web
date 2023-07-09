@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faMagnifyingGlass, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faMagnifyingGlass, faChevronDown, faHandPointRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CheckChatLogin from '../components/CheckChatLogin';
 import Doctor from '../components/Doctor';
+import { useTranslation } from 'react-i18next';
 
 const symptomps = [
     'Itching',
@@ -141,6 +142,8 @@ const symptomps = [
 const Predict = () => {
     const [list, setList] = useState([]);
 
+    const { t } = useTranslation();
+
     const [listBellow, setListBellow] = useState(symptomps);
 
     const [searchValue, setSearchValue] = useState('');
@@ -227,7 +230,7 @@ const Predict = () => {
     };
     return (
         <div className="py-5 predict" style={{ backgroundColor: '#f6f7fb' }}>
-            <div className="mb-3">
+            <div className="mb-4">
                 <div className="symptomp-search container d-flex ">
                     <div className="search-icon">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -236,13 +239,13 @@ const Predict = () => {
                         className="search-input"
                         type="text"
                         name="search"
-                        placeholder="search your symptom"
+                        placeholder={t('predict.search')}
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                     />
                 </div>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
                 <div className="container text-center">
                     <div className="row g-3">
                         {list.sort().map((value, id) => (
@@ -258,27 +261,33 @@ const Predict = () => {
                     </div>
                 </div>
             </div>
-            <div className="mb-3 d-flex justify-content-center align-items-center" style={{ gap: '20px' }}>
+            <div className="mb-4 d-flex justify-content-center align-items-center" style={{ gap: '30px' }}>
                 <button type="button" className="btn btn-info" onClick={handlePrediction}>
-                    Predict
+                    {t('predict.predict_btn1')}
                 </button>
                 <button type="button" className="btn btn-danger" onClick={handleReset}>
-                    Reset
+                    {t('predict.predict_btn2')}
                 </button>
             </div>
             <div className="container">
-                <div className="bg-light mb-3 predict-container none">
+                <div className="bg-light mb-4 predict-container none">
                     <div className="d-flex justify-content-between align-items-center predict-header">
-                        <span>You may have:</span>
+                        <span>{t('predict.may')}</span>
                         <span className="predict-result">{resultPrediction}</span>
                         <span className="click-detail d-flex align-items-center" onClick={handleDetail}>
-                            Click to see detail... <FontAwesomeIcon className="ms-2" icon={faChevronDown} />
+                            {t('predict.see')} <FontAwesomeIcon className="ms-2" icon={faChevronDown} />
                         </span>
                     </div>
                     <div className="row g-3 disease-doctor none">
                         <div className="disease-info col-12 col-md-6 col-lg-8">
-                            <h5>{diseaseInfo.description}</h5>
-                            <h5>Symptomps: {diseaseInfo.symptom}</h5>
+                            <h5 className="d-flex" style={{ gap: '8px' }}>
+                                <FontAwesomeIcon icon={faHandPointRight} className="mt-1" />
+                                {diseaseInfo.description}
+                            </h5>
+                            <h5 className="d-flex" style={{ gap: '8px' }}>
+                                <FontAwesomeIcon icon={faHandPointRight} className="mt-1" />
+                                {t('predict.symptom')} {diseaseInfo.symptom}
+                            </h5>
                         </div>
                         <Doctor key={doctorSuggest.id} doctor={doctorSuggest} />
                     </div>

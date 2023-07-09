@@ -5,9 +5,11 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserNurse, faCalendar, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import CheckChatLogin from '../components/CheckChatLogin';
+import { useTranslation } from 'react-i18next';
 
 const ServiceDetail = () => {
     const [services, setServices] = useState([]);
+    const { t } = useTranslation();
     useEffect(() => {
         axios
             .get('https://raw.githubusercontent.com/dinhhuy2001/fake-data-for-finalPbl/master/services.json')
@@ -36,19 +38,19 @@ const ServiceDetail = () => {
                             <h1 className="fw-extrabold blue-color" style={{ fontWeight: '600' }}>
                                 {specificService?.name}
                             </h1>
-                            <h6 style={{ fontWeight: '600' }}>
-                                <FontAwesomeIcon icon={faUserNurse} /> Specialised Doctors:{' '}
+                            <h6 style={{ fontWeight: '600', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                <FontAwesomeIcon icon={faUserNurse} /> {t('home.specialized_doctor')}
                                 {specificService?.countDoctors}
                             </h6>
-                            <h6 style={{ fontWeight: '600' }}>
-                                <FontAwesomeIcon icon={faCalendar} /> Open: {specificService?.openDays}
+                            <h6 style={{ fontWeight: '600', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                <FontAwesomeIcon icon={faCalendar} /> {t('appoint.open')} {specificService?.openDays}
                             </h6>
                             <p className="fs-5">{specificService?.details}</p>
                             <button
                                 onClick={handleBackBtn}
                                 className="default-btn d-flex justify-content-center align-items-center mx-auto mt-4"
                             >
-                                <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Back
+                                <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> {t('common.back_btn')}
                             </button>
                         </div>
                     </div>

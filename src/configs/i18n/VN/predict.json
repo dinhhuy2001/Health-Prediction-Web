@@ -1,0 +1,10 @@
+{
+    "predict": {
+        "search": "Tìm kiếm triệu chứng",
+        "predict_btn1": "Chẩn đoán bệnh",
+        "predict_btn2": "Reset",
+        "may": "Bạn có thể mắc phải:",
+        "see": "Nhấn để xem chi tiết...",
+        "symptom": "Triệu chứng: "
+    }
+}

@@ -1,17 +1,16 @@
-import { AuthContext } from '../context/AuthContext';
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import adminAva from '../img/adminAva.jpg';
 
 function DashboardHeader({ btnText, onClick }) {
-    const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleLogout = async () => {
         try {
             await signOut(auth);
+            localStorage.removeItem('email');
             navigate('/login');
         } catch (e) {
             console.log(e.message);
@@ -27,7 +26,7 @@ function DashboardHeader({ btnText, onClick }) {
 
             <div className="d-flex justify-content-center align-items-center">
                 <div className="header-info">
-                    <img src={currentUser.photoURL} alt="avatar" />
+                    <img src={adminAva} alt="avatar" />
                     <span>Admin</span>
                 </div>
 

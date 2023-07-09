@@ -1,0 +1,10 @@
+{
+    "predict": {
+        "search": "search your symptom",
+        "predict_btn1": "Predict",
+        "predict_btn2": "Reset",
+        "may": "You may have:",
+        "see": "Click to see detail...",
+        "symptom": "Symptoms: "
+    }
+}

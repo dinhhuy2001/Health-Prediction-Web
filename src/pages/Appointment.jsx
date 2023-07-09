@@ -2,8 +2,12 @@ import Doctor from '../components/Doctor';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CheckChatLogin from '../components/CheckChatLogin';
+import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Appointment = () => {
+    const { t } = useTranslation();
     const [doctors, setDoctors] = useState([]);
     useEffect(() => {
         axios
@@ -13,8 +17,10 @@ const Appointment = () => {
 
     return (
         <div className="py-5" style={{ backgroundColor: 'rgb(246, 247, 251)' }}>
-            <h2 className="text-center blue-color">Request Appointment</h2>
-            <p className="text-center fs-5">Make sure to make an appointment before visiting our clinic</p>
+            <h2 className="text-center blue-color">
+                <FontAwesomeIcon icon={faCalendarCheck} /> {t('home.appoint_request')}
+            </h2>
+            <p className="text-center fs-5">{t('home.appoint_desc')}</p>
             <div className="container">
                 <div className="row g-3">
                     {doctors.map((doctor) => (

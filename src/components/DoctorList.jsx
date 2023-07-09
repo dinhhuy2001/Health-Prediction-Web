@@ -1,44 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import DashboardHeader from './AD_Header';
+import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
-function Users() {
-    const [userData, setUserData] = useState([]);
+function DoctorList() {
     const [searchValue, setSearchValue] = useState('');
-    let arr = [];
+    const { t } = useTranslation();
+    const { currentUser } = useContext(AuthContext);
+    const [userData, setUserData] = useState([]);
     const navigate = useNavigate();
+    const arr = [];
 
     const getUserData = async () => {
-        const querySnapshot = await getDocs(collection(db, 'userInfo'));
+        const querySnapshot = await getDocs(collection(db, 'doctors'));
+        console.log(querySnapshot);
         querySnapshot.forEach((doc) => {
             arr.push(doc.data());
         });
         setUserData(arr);
+        console.log(userData);
     };
 
     const handleNavigate = () => {
-        navigate('/AddUser');
+        navigate('/AddDoctor');
     };
+
     useEffect(() => {
         getUserData();
     }, []);
 
     return (
         <>
-            {
+            {currentUser && (
                 <div className="dashboard-content">
-                    <DashboardHeader btnText="New User" onClick={handleNavigate} />
+                    <DashboardHeader btnText="New Doctor" onClick={handleNavigate} />
 
                     <div className="dashboard-content-container">
                         <div className="dashboard-content-header">
-                            <h2>Users List</h2>
+                            <h2>{t('appoint.doctorList')}</h2>
                             <div className="dashboard-content-search">
                                 <input
                                     type="text"
                                     value={searchValue}
-                                    placeholder="Search Username"
+                                    placeholder="Search.."
                                     className="dashboard-content-input"
                                     onChange={(e) => setSearchValue(e.target.value)}
                                 />
@@ -55,6 +62,7 @@ function Users() {
                                     <th></th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {userData && searchValue === ''
                                     ? userData.map((index, key) => (
@@ -81,9 +89,9 @@ function Users() {
                         </table>
                     </div>
                 </div>
-            }
+            )}
         </>
     );
 }
 
-export default Users;
+export default DoctorList;

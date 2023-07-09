@@ -4,7 +4,19 @@ import { useLocation } from 'react-router-dom';
 import SideBarItem from './AD_SidebarItem';
 import logo from '../img/header.png';
 
-function SideBar({ menu }) {
+function SideBar() {
+    const menu = [
+        {
+            id: 1,
+            path: '/userManager',
+            title: 'Manage Users',
+        },
+        {
+            id: 2,
+            path: '/doctorManager',
+            title: 'Manage Doctors',
+        },
+    ];
     const location = useLocation();
 
     const [active, setActive] = useState(1);

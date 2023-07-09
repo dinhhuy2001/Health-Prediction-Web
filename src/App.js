@@ -17,10 +17,13 @@ import ServiceDetail from './pages/ServiceDetail';
 import AppointmentDetail from './pages/AppointmentDetail';
 import AppointComplete from './pages/AppointComplete';
 import DoctorSchedule from './pages/DoctorSchedule';
-import Admin from './pages/Admin';
+import UserManage from './pages/UserManage';
 import DoctorHeader from './components/DoctorHeader';
+import DoctorManage from './pages/DoctorManage';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase';
+import AddDoctor from './pages/DoctorAdd';
+import AddUser from './pages/UserAdd';
 
 function App() {
     const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -42,6 +45,9 @@ function App() {
     useEffect(() => {
         const emailUser = localStorage.getItem('email');
         let object = {};
+        if (emailUser === 'admin@gmail.com') {
+            setCurrentUser({ isAdmin: true });
+        }
         const hasDoctor = arr.some((obj) => {
             if (obj.email === emailUser) {
                 object = obj;
@@ -49,13 +55,14 @@ function App() {
             }
             return false;
         });
+
         hasDoctor && setCurrentUser({ isDoctor: true, ...object });
     }, [arr]);
 
     return (
         <Router>
             {currentUser?.isDoctor === true && <DoctorHeader />}
-            {!currentUser?.isDoctor && <Header />}
+            {!currentUser?.isDoctor && !currentUser?.isAdmin && <Header />}
             {currentUser && <ChatHome />}
             <Routes>
                 <Route exact path="/" element={<Home />}></Route>
@@ -63,15 +70,22 @@ function App() {
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/services" element={<Services />}></Route>
                 <Route path="/appointment" element={<Appointment />}></Route>
-                <Route path="/appointment/:doctorId" element={<AppointmentDetail />}></Route>
-                <Route path="/appointComplete" element={<AppointComplete />}></Route>
+                {currentUser?.isDoctor !== true && (
+                    <Route path="/appointment/:doctorId" element={<AppointmentDetail />}></Route>
+                )}
+                {currentUser?.isDoctor !== true && (
+                    <Route path="/appointComplete" element={<AppointComplete />}></Route>
+                )}
                 {currentUser?.isDoctor === true && <Route path="/doctorSchedule" element={<DoctorSchedule />}></Route>}
-                {/* {<Route path="/admin" element={<Admin />} />} */}
+                {currentUser?.isAdmin === true && <Route path="/userManager" element={<UserManage />} />}
+                {currentUser?.isAdmin === true && <Route path="/doctorManager" element={<DoctorManage />} />}
+                {currentUser?.isAdmin === true && <Route path="/AddDoctor" element={<AddDoctor />} />}
+                {currentUser?.isAdmin === true && <Route path="/AddUser" element={<AddUser />} />}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
             </Routes>
-            <Footer />
+            {!currentUser?.isAdmin && <Footer />}
         </Router>
     );
 }

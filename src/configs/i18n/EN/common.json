@@ -1,0 +1,27 @@
+{
+    "common": {
+        "header": {
+            "predict": "Disease Predict",
+            "about": "About",
+            "services": "Services",
+            "appoint": "Appointment",
+            "schedule": "Schedule"
+        },
+        "footer": {
+            "follow": "Follow Us"
+        },
+        "back_btn": "Back",
+        "chat_find": "Find a user",
+        "login": "Login",
+        "register": "Register",
+        "don": "You don't have an account?",
+        "sign_in": "Sign in",
+        "email": "Email",
+        "password": "Password",
+        "displayName": "Display Name",
+        "sign_up": "Sign up",
+        "add_ava": "Add an avatar",
+        "do": "You do have an account?",
+        "please": "Please login to use this!"
+    }
+}
